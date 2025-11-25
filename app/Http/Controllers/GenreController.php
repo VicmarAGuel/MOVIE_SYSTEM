@@ -8,11 +8,10 @@ use Illuminate\Http\Request;
 class GenreController extends Controller
 {
     public function index()
-{
-    $genres = Genre::withCount('movies')->get();
-    return view('genre', compact('genres')); // no "genres." prefix
-}
-
+    {
+        $genres = Genre::withCount('movies')->get();
+        return view('genre', compact('genres'));
+    }
 
     public function store(Request $request)
     {
@@ -23,7 +22,7 @@ class GenreController extends Controller
 
         Genre::create($request->all());
 
-        return back()->with('success', 'Genre added successfully!');
+        return back()->with('success', 'New genre has been added.');
     }
 
     public function update(Request $request, Genre $genre)
@@ -35,13 +34,13 @@ class GenreController extends Controller
 
         $genre->update($request->all());
 
-        return back()->with('success', 'Genre updated successfully!');
+        return back()->with('success', 'Genre details updated.');
     }
 
     public function destroy(Genre $genre)
     {
         $genre->delete();
 
-        return back()->with('success', 'Genre deleted successfully!');
+        return back()->with('success', 'Genre has been deleted.');
     }
 }

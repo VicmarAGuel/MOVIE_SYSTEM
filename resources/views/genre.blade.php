@@ -1,8 +1,9 @@
 <x-layouts.app :title="__('Genres')">
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
 
+        {{-- Success Message --}}
         @if(session('success'))
-            <div class="rounded-lg bg-green-700/30 p-4 text-green-300 dark:bg-green-700/30 dark:text-green-300">
+            <div id="flash-message" class="rounded-lg bg-green-700/30 p-4 text-green-300 dark:bg-green-700/30 dark:text-green-300">
                 {{ session('success') }}
             </div>
         @endif
@@ -147,5 +148,20 @@
             document.getElementById('editGenreModal').classList.add('hidden');
             document.getElementById('editGenreModal').classList.remove('flex');
         }
+        document.addEventListener('DOMContentLoaded', () => {
+    const flashMessage = document.getElementById('flash-message');
+
+    if (flashMessage) {
+        setTimeout(() => {
+            flashMessage.style.transition = 'opacity 0.5s ease-out';
+            flashMessage.style.opacity = '0';
+
+            setTimeout(() => {
+                flashMessage.remove();
+            }, 500);
+        }, 3000);
+    }
+});
+
     </script>
 </x-layouts.app>
